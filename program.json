@@ -1,0 +1,10 @@
+{
+    "program": "friends.aleo",
+    "version": "0.0.0",
+    "description": "",
+    "development": {
+        "private_key": "APrivateKey1zkpJiSwfdzRUGv778d9E46i8ousxpSVuqbhgMTdLsrsz1G3",
+        "address": "aleo1d7k63tmjchnrrcuexjz3nzzytjtp72a2n79x0jnzj2knp6n32sps4gt2te"
+    },
+    "license": "MIT"
+}
