@@ -13,3 +13,8 @@ info: FriendInfo = FriendInfo{
         orientation: 1u8,
 };
 num: u16 = 8u16;
+
+[mint_frient]
+name: field = 34454714849716581field;
+line: field = 13647190699field;
+orientation: u8 = 5u8;
