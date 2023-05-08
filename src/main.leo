@@ -53,7 +53,6 @@ program friends.aleo {
     } 
 
     transition match_frient(public num: u16) -> FriendInfo{
-        let info: FriendInfo;
         return info then finalize(num);
 
     }
