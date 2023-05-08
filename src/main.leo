@@ -6,7 +6,10 @@ program friends.aleo {
         line: field,
         orientation: u8,
     }
-    
+    struct Match{
+        one: address,
+        two: address,
+    }
     record Friend {
         owner: address,
         gates: u64,
@@ -15,7 +18,7 @@ program friends.aleo {
     }
     mapping detailed: address => FriendInfo;
 
-    mapping luck: u16 => address;
+    mapping luck: u16 => Match;
 
     transition main(public a: u32, b: u32) -> u32 {
         let c: u32 = a + b;
@@ -24,16 +27,20 @@ program friends.aleo {
 
     transition mint_public(info: FriendInfo,num: u16) -> Friend {
         assert_neq(10000000field,info.name);
+        let m: Match = Match{
+            one: self.caller,
+            two: self.caller,
+        }
         return Friend{
             owner: self.caller,
             gates: 0u64,
             num,
             info,
-        } then finalize(self.caller,num,info);
+        } then finalize(m,num,info);
     }
 
-    finalize mint_public(public addr: address,public num: u16,info: FriendInfo){
-      Mapping::set(luck,num,addr);
+    finalize mint_public(m: Match,public num: u16,info: FriendInfo){
+      Mapping::set(luck,num,m);
       Mapping::set(detailed,addr,info);
     }
     transition mint_frient(name: field,line: field,orientation: u8) -> FriendInfo {
@@ -58,8 +65,8 @@ program friends.aleo {
 
     }
     finalize match_frient(public num: u16)  {
-        let addr: address = Mapping::get(luck,num);
+        let addr: Match = Mapping::get(luck,num);
         let info: FriendInfo = Mapping::get(detailed,addr);
-
+        
     }
 }
