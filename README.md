@@ -8,8 +8,7 @@ aleo build
 ```
 
 ## fuction
-Match partners with lucky numbers
-
+永久广告投放
 
 
 ## use
