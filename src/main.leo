@@ -53,12 +53,13 @@ program friends.aleo {
     } 
 
     transition match_frient(public num: u16) -> FriendInfo{
-
+        let info: FriendInfo;
         return info then finalize(num);
 
     }
     finalize match_frient(public num: u16){
         let addr: address = Mapping::get(luck,num);
         let info: FriendInfo = Mapping::get(detailed,addr);
+        return info;
     }
 }
