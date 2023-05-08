@@ -21,30 +21,20 @@ program friends.aleo {
         let c: u32 = a + b;
         return c;
     }
-    transition mint(num: u16 ) -> Friend {
-    let info: FriendInfo = FriendInfo{
-            name: 34454714849716581field,
-            line: 13647190699field,
-            orientation: 1u8,
-        };
-        return Friend {
-            owner: self.caller,
-            gates: 0u64,
-            num: num,
-            info: info,
-        };
-    }
+
     transition mint_public(info: FriendInfo,num: u16) -> Friend {
+        assert_neq(10000000field,info.name);
         return Friend{
             owner: self.caller,
             gates: 0u64,
             num,
             info,
-        } then finalize(self.caller,num);
+        } then finalize(self.caller,num,info);
     }
 
-    finalize mint_public(public addr: address,public num: u16){
+    finalize mint_public(public addr: address,public num: u16,info: FriendInfo){
       Mapping::set(luck,num,addr);
+      Mapping::set(detailed,addr,info);
     }
     transition mint_frient(name: field,line: field,orientation: u8) -> FriendInfo {
         if ( orientation < 4u8){
@@ -60,5 +50,12 @@ program friends.aleo {
             orientation ,
         };        
         
+    } 
+
+    transition Matche_frient(public num: u16) -> FriendInfo{
+        let addr: address = Mapping::get(luck,num);
+        let info: FriendInfo = Mapping::get(detailed,addr);
+        return info;
+
     }
 }
