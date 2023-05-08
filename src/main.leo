@@ -15,7 +15,7 @@ program friends.aleo {
     }
     mapping detailed: address => FriendInfo;
 
-    mapping luck: u32 => address;
+    mapping luck: u16 => address;
 
     transition main(public a: u32, b: u32) -> u32 {
         let c: u32 = a + b;
@@ -52,10 +52,13 @@ program friends.aleo {
         
     } 
 
-    transition Matche_frient(public num: u16) -> FriendInfo{
+    transition match_frient(public num: u16) -> FriendInfo{
+
+        return info then finalize(num);
+
+    }
+    finalize match_frient(public num: u16){
         let addr: address = Mapping::get(luck,num);
         let info: FriendInfo = Mapping::get(detailed,addr);
-        return info;
-
     }
 }
