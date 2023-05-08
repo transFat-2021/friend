@@ -8,10 +8,10 @@ program friends.aleo {
         line: field,
         level: u8,
     }
-    mapping Name: u16 => field;
-    mapping Info: u16 => field;
-    mapping Line: u16 => field;
-    mapping Level: u16 => u8;
+    mapping Name: u32 => field;
+    mapping Info: u32 => field;
+    mapping Line: u32 => field;
+    mapping Level: u32 => u8;
 
     transition mint(
         num: u32,
@@ -19,7 +19,7 @@ program friends.aleo {
         public info: field,
         public line: field,
         public level: u8,
-    ) -> Info {
+    ) -> AdInfo {
         return AdInfo{
             owner: self.caller,
             gates: 0u64,

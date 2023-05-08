@@ -5,7 +5,9 @@
 To compile this Aleo program, run:
 ```bash
 aleo build
+
 ```
+
 
 ## fuction
 永久广告投放
@@ -13,8 +15,7 @@ aleo build
 
 ## use
 - step 1
-create FriendInfo
-如果返回的name和line全部为10000000field，则无效FriendInfo
+
 
 注意，转换你想要填充的信息：
 `from binascii import hexlify, unhexlify
@@ -39,7 +40,8 @@ class BytesIntEncoder:
 
         return unhexlify('%x' % i) if i != 0 else b''`
 - step 2
-create luck 
+使用一个随机数，投放你的信息，永久存储在链上
 
-- step 3 
-匹配luck
+```bash
+leo run mint "3u32" "12312300field" "12300field" "123141200field" "0u8"
+```
