@@ -45,3 +45,17 @@ class BytesIntEncoder:
 ```bash
 leo run mint "3u32" "12312300field" "12300field" "123141200field" "0u8"
 ```
+### Goblin
+增加一个摇奖机系统，通过输入record，在固定字段输入多个数字，和想下注的测试网积分，会产生一个新的record记录。同时有一个Transaction ID，如果Transaction ID的最后一位和你输入的record的固定字段的字符匹配。会按照赔率给你转测试网积分。
+
+```bash
+leo run mint_marble 
+
+## 想下注0df,用上述转换后得3171430
+
+leo run gambling $‘record' '3171430field' '10u64' 
+```
+
+todo:
+前端可视化主页
+后续增加自动赔付机制

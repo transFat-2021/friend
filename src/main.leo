@@ -1,49 +1,40 @@
 // The 'friends' program.
 program friends.aleo {
-    record AdInfo {
+
+
+    record marble {
         owner: address,
         gates: u64,
-        name: field,
-        info: field,
-        line: field,
-        level: u8,
+        num: u64,
+        data: field,
     }
-    mapping Name: u32 => field;
-    mapping Info: u32 => field;
-    mapping Line: u32 => field;
-    mapping Level: u32 => u8;
 
-    transition mint(
-        num: u32,
-        public name: field,
-        public info: field,
-        public line: field,
-        public level: u8,
-    ) -> AdInfo {
-        return AdInfo{
+
+
+
+    
+
+    transition mint_marble() -> marble{
+        return marble{
             owner: self.caller,
             gates: 0u64,
-            name,
-            info,
-            line,
-            level
-        } then finalize(num,name,info,line,level);
-
+            num: 50u64,
+            data: 1field,
+        };
     }
-    finalize mint(
-        num: u32,
-        public name: field,
-        public info: field,
-        public line: field,
-        public level: u8,
-    ){
-        let n: field = Mapping::get_or_init(Name,num,0field);
-        let i: field = Mapping::get_or_init(Info,num,0field);
-        let l: field = Mapping::get_or_init(Line,num,0field);
-        let L: u8 = Mapping::get_or_init(Level,num,0u8);
-        Mapping::set(Name,num,name);
-        Mapping::set(Info,num,info);
-        Mapping::set(Line,num,line);
-        Mapping::set(Level,num,level);
+
+    transition gambling(
+        m: marble, 
+        public data: field,
+        public num: u64,
+    ) -> marble{
+        let balance: u64 = m.num - num;
+        
+        return marble{
+            owner: self.caller,
+            gates: 0u64,
+            num: balance,
+            data: data,
+        };
     }
 }
